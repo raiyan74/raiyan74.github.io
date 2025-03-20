@@ -1,0 +1,332 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sell Your Property - Real Estate Mock Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation between sections
+            const nextButtons = document.querySelectorAll('.next');
+            const prevButtons = document.querySelectorAll('.prev');
+            
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentSection = this.closest('.form-section');
+                    const nextSectionId = this.getAttribute('data-next');
+                    const nextSection = document.getElementById(nextSectionId);
+                    
+                    // Move to next section
+                    currentSection.classList.remove('active');
+                    nextSection.classList.add('active');
+                    
+                    // Update progress bar
+                    const currentStepNum = parseInt(nextSectionId.replace('section', ''));
+                    const currentStep = document.getElementById('step' + currentStepNum);
+                    const prevStep = document.getElementById('step' + (currentStepNum - 1));
+                    
+                    currentStep.classList.add('active');
+                    prevStep.classList.add('completed');
+                    prevStep.classList.remove('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentSection = this.closest('.form-section');
+                    const prevSectionId = this.getAttribute('data-prev');
+                    const prevSection = document.getElementById(prevSectionId);
+                    
+                    // Move to previous section
+                    currentSection.classList.remove('active');
+                    prevSection.classList.add('active');
+                    
+                    // Update progress bar
+                    const currentStepNum = parseInt(currentSection.id.replace('section', ''));
+                    const prevStepNum = parseInt(prevSectionId.replace('section', ''));
+                    const currentStep = document.getElementById('step' + currentStepNum);
+                    const prevStep = document.getElementById('step' + prevStepNum);
+                    
+                    currentStep.classList.remove('active');
+                    prevStep.classList.remove('completed');
+                    prevStep.classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Form submission
+            document.getElementById('property-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Here you would typically send the form data to your server
+                alert('Thank you! Your property listing has been submitted successfully.');
+                
+                // Reset form
+                // this.reset();
+                
+                // Go back to first section
+                document.querySelectorAll('.form-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('section1').classList.add('active');
+                
+                // Reset progress bar
+                document.querySelectorAll('.progress-step').forEach(step => {
+                    step.classList.remove('active');
+                    step.classList.remove('completed');
+                });
+                document.getElementById('step1').classList.add('active');
+            });
+        });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <!--navbar on top from bootstrap-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">COSC 3P94 RE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="buy.html">Buy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sell.html">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agents.html">Agents</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Resources
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Blog & News</a></li>
+                  <li><a class="dropdown-item" href="#">Real Estate Guides</a></li>
+                  <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+
+    <!-- Sell Page with layered design and centered card -->
+    <div class="sell-page-container">
+        <!-- Background image at z-index 0 -->
+        <div class="background-image" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/032/237/027/4k/richard-rude-richardrude-olympus-012.jpg?1605844875');"></div>
+
+        
+
+        <!--FORM-->
+        <div class="sell-regular-page-form-container">
+            <h1>List Your Property</h1>
+            
+            <div class="property-progress-container">
+                <div class="property-progress-step active" id="step1">
+                    1
+                    <div class="property-progress-step-label">Basic Info</div>
+                </div>
+                <div class="property-progress-step" id="step2">
+                    2
+                    <div class="property-progress-step-label">Price & Condition</div>
+                </div>
+                <div class="property-progress-step" id="step3">
+                    3
+                    <div class="property-progress-step-label">Media</div>
+                </div>
+                <div class="property-progress-step" id="step4">
+                    4
+                    <div class="property-progress-step-label">Contact</div>
+                </div>
+            </div>
+            
+            <form id="property-form">
+                <!-- Section 1: Basic Property Information -->
+                <div class="form-section active" id="section1">
+                    <h2 class="form-header">Basic Property Information</h2>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="address">Full Property Address</label>
+                            <input type="text" id="address" name="address">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="property-type">Property Type</label>
+                            <select id="property-type" name="property-type">
+                                <option value="">Select property type</option>
+                                <option value="single-family">Single-family Home</option>
+                                <option value="townhouse">Townhouse</option>
+                                <option value="condo">Condo</option>
+                                <option value="duplex">Duplex</option>
+                                <option value="multi-family">Multi-family</option>
+                                <option value="mobile">Mobile Home</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="year-built">Year Built</label>
+                            <input type="number" id="year-built" name="year-built" min="1800" max="2025">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="square-footage">Square Footage</label>
+                            <input type="number" id="square-footage" name="square-footage" min="1">
+                            <div class="helper-text">Total livable area in square feet</div>
+                        </div>
+                        
+                        <div class="nav-buttons">
+                            <div></div>
+                            <button type="button" class="next" data-next="section2">Next: Price & Condition</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 2: Pricing and Condition -->
+                <div class="form-section" id="section2">
+                    <h2 class="form-header">Pricing and Property Condition</h2>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="asking-price">Asking Price ($)</label>
+                            <input type="number" id="asking-price" name="asking-price">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date-available">Date Available for Sale</label>
+                            <input type="date" id="date-available" name="date-available">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="property-condition">Current Property Condition</label>
+                            <select id="property-condition" name="property-condition">
+                                <option value="">Select</option>
+                                <option value="excellent">Excellent - Move-in ready</option>
+                                <option value="good">Good - Minor updates/cleaning needed</option>
+                                <option value="fair">Fair - Needs minor repairs</option>
+                                <option value="poor">Poor - Needs major repairs</option>
+                            </select>
+                        </div>
+                        
+                        <div class="nav-buttons">
+                            <button type="button" class="prev" data-prev="section1">Previous</button>
+                            <button type="button" class="next" data-next="section3">Next: Media</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 3: Media -->
+                <div class="form-section" id="section3">
+                    <h2 class="form-header">Property Media</h2>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="property-photos">Upload Property Photos</label>
+                            <div class="helper-text">Include exterior, interior rooms, yard, etc. (Max 10 photos, 5MB each)</div>
+                            <input type="file" id="property-photos" name="property-photos" multiple accept="image/*" class="file-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="floor-plans">Upload Floor Plans (if available)</label>
+                            <input type="file" id="floor-plans" name="floor-plans" accept="image/*, application/pdf" class="file-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="virtual-tour">Virtual Tour Link (if available)</label>
+                            <input type="text" id="virtual-tour" name="virtual-tour" placeholder="https://">
+                        </div>
+                        
+                        <div class="nav-buttons">
+                            <button type="button" class="prev" data-prev="section2">Previous</button>
+                            <button type="button" class="next" data-next="section4">Next: Contact Info</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 4: Seller Information -->
+                <div class="form-section" id="section4">
+                    <h2 class="form-header">Seller Contact Information</h2>
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="full-name">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Preferred Contact Method</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="contact-method" value="phone"> Phone</label>
+                                <label><input type="radio" name="contact-method" value="email"> Email</label>
+                                <label><input type="radio" name="contact-method" value="text"> Text</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-times">Best Times to Contact</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="contact-times" value="morning"> Morning (8am-12pm)</label>
+                                <label><input type="checkbox" name="contact-times" value="afternoon"> Afternoon (12pm-5pm)</label>
+                                <label><input type="checkbox" name="contact-times" value="evening"> Evening (5pm-8pm)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="nav-buttons">
+                            <button type="button" class="prev" data-prev="section3">Previous</button>
+                            <button type="submit" class="submit">Submit Listing</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    
+
+
+
+
+
+    <footer class="bg-dark text-white text-center py-4">
+        &copy; 2025 COSC3P94 |
+
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Site Map</a> |
+
+    </footer>
+
+</body>
+
+</html>

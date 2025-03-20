@@ -1,0 +1,205 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sell Your Property - Real Estate Mock Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <!--navbar on top from bootstrap-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">COSC 3P94 RE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="buy.html">Buy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sell.html">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agents.html">Agents</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Resources
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Blog & News</a></li>
+                  <li><a class="dropdown-item" href="#">Real Estate Guides</a></li>
+                  <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+
+    <!-- Sell Page with layered design and centered card -->
+    <div class="sell-page-container">
+        <!-- Background image at z-index 0 -->
+        <div class="background-image" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/043/560/101/4k/richard-rude-richardrude-storms-point-001.jpg?1637623005');"></div>
+
+
+        <!-- Form Card -->
+        <div class="plot-form-container">
+          <div class="plot-sell-card">
+              <div class="plot-sell-header">
+                  <h2>Sell Your Land or Plot</h2>
+              </div>
+              <div class="plot-sell-body">
+                  <p class="plot-sell-subtitle">Tell us about the property you're looking to sell</p>
+                  
+                  <form id="plotSellForm">
+                      <div class="plot-form-row">
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="propertyType" class="plot-form-label">Property Type<span class="plot-required-marker">*</span></label>
+                                  <select class="plot-form-control plot-form-select" id="propertyType" required>
+                                      <option value="" selected disabled>Select property type</option>
+                                      <option value="vacant-land">Vacant Land</option>
+                                      <option value="residential-lot">Residential Lot</option>
+                                      <option value="commercial-plot">Commercial Plot</option>
+                                      <option value="farm-land">Farm Land</option>
+                                      <option value="other">Other</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="propertySize" class="plot-form-label">Property Size (acres)<span class="plot-required-marker">*</span></label>
+                                  <input type="number" class="plot-form-control" id="propertySize" min="0.01" step="0.01" required>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="plot-form-group">
+                          <label for="propertyAddress" class="plot-form-label">Property Address<span class="plot-required-marker">*</span></label>
+                          <textarea class="plot-form-control" id="propertyAddress" rows="3" required placeholder="Full address of the property"></textarea>
+                      </div>
+                      
+                      <div class="plot-form-row">
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="askingPrice" class="plot-form-label">Asking Price ($)<span class="plot-required-marker">*</span></label>
+                                  <input type="number" class="plot-form-control" id="askingPrice" min="1" required>
+                              </div>
+                          </div>
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="zoning" class="plot-form-label">Current Zoning<span class="plot-required-marker">*</span></label>
+                                  <select class="plot-form-control plot-form-select" id="zoning" required>
+                                      <option value="" selected disabled>Select zoning type</option>
+                                      <option value="residential">Residential</option>
+                                      <option value="commercial">Commercial</option>
+                                      <option value="industrial">Industrial</option>
+                                      <option value="agricultural">Agricultural</option>
+                                      <option value="mixed-use">Mixed Use</option>
+                                      <option value="unknown">Unknown</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="plot-form-group">
+                          <label for="propertyDescription" class="plot-form-label">Property Description<span class="plot-required-marker">*</span></label>
+                          <textarea class="plot-form-control" id="propertyDescription" rows="4" required placeholder="Describe your property, include notable features, utilities available, etc."></textarea>
+                      </div>
+                      
+                      <div class="plot-form-group">
+                          <label class="plot-form-label">Property Features</label>
+                          <div class="plot-features-container">
+                              <div class="plot-feature-item">
+                                  <input type="checkbox" id="featureWater" class="plot-feature-checkbox">
+                                  <label for="featureWater">Water Access</label>
+                              </div>
+                              <div class="plot-feature-item">
+                                  <input type="checkbox" id="featureElectricity" class="plot-feature-checkbox">
+                                  <label for="featureElectricity">Electricity</label>
+                              </div>
+                              <div class="plot-feature-item">
+                                  <input type="checkbox" id="featureSewage" class="plot-feature-checkbox">
+                                  <label for="featureSewage">Sewage System</label>
+                              </div>
+                              <div class="plot-feature-item">
+                                  <input type="checkbox" id="featureRoadAccess" class="plot-feature-checkbox">
+                                  <label for="featureRoadAccess">Road Access</label>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="plot-form-group">
+                          <label class="plot-form-label">Upload Property Images</label>
+                          <input type="file" class="plot-form-control plot-form-file" id="propertyImages" multiple accept="image/*">
+                          <div class="plot-form-text">Upload up to 5 images of your property (optional)</div>
+                      </div>
+                      
+                      <div class="plot-form-row">
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="contactEmail" class="plot-form-label">Email Address<span class="plot-required-marker">*</span></label>
+                                  <input type="email" class="plot-form-control" id="contactEmail" required>
+                              </div>
+                          </div>
+                          <div class="plot-form-col">
+                              <div class="plot-form-group">
+                                  <label for="contactPhone" class="plot-form-label">Phone Number<span class="plot-required-marker">*</span></label>
+                                  <input type="tel" class="plot-form-control" id="contactPhone" required>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="plot-form-group">
+                          <label for="contactMethod" class="plot-form-label">Preferred Contact Method<span class="plot-required-marker">*</span></label>
+                          <select class="plot-form-control plot-form-select" id="contactMethod" required>
+                              <option value="email">Email</option>
+                              <option value="phone">Phone</option>
+                              <option value="both">Both Email and Phone</option>
+                          </select>
+                      </div>
+                      
+                      <div class="plot-form-check">
+                          <input type="checkbox" class="plot-form-check-input" id="termsAgreement" required>
+                          <label class="plot-form-check-label" for="termsAgreement">I agree to the terms and conditions</label>
+                      </div>
+                      
+                      <button type="submit" class="plot-submit-btn">Submit Property Listing</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+    <footer class="bg-dark text-white text-center py-4">
+        &copy; 2025 COSC3P94 |
+
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Site Map</a> |
+
+    </footer>
+
+</body>
+
+</html>

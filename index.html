@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Real Estate Mock Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+    <style>a { text-decoration: none; }</style>
+
+<body>
+
+    <!--navbar on top from bootstrap-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">COSC 3P94 RE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="buy.html">Buy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="sell.html">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agents.html">Agents</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Resources
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="blog.html">Blogs & News</a></li>
+                  <li><a class="dropdown-item" href="#">Real Estate Guides</a></li>
+                  <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+    </nav>
+
+    <!-- Property Search Section -->
+    <div class="property-search-container">
+    <div class="container">
+        <h2 class="property-search-title">Find Your Dream Home</h2>
+        <p class="property-search-subtitle">Browse thousands of properties in your desired location</p>
+        
+        <div class="search-form-container">
+            <form class="property-search-form">
+                <select class="form-select" aria-label="Property type">
+                    <option selected>Property Type</option>
+                    <option value="house">House</option>
+                    <option value="condo">Condo</option>
+                    <option value="townhouse">Townhouse</option>
+                    <option value="apartment">Apartment</option>
+                </select>
+                
+                <select class="form-select" aria-label="Location">
+                    <option selected>Location</option>
+                    <option value="toronto">Toronto</option>
+                    <option value="mississauga">Mississauga</option>
+                    <option value="oakville">Oakville</option>
+                    <option value="burlington">Burlington</option>
+                    <option value="hamilton">Hamilton</option>
+                </select>
+                
+                
+                <select class="form-select" aria-label="Price-Range">
+                    <option selected>Price Range</option>
+                    <option value="lower">100k-500k</option>
+                    <option value="medium">500k-750k</option>
+                    <option value="higher">750k-1M</option>
+                    <option value="luxury">1M-2M</option>
+                    <option value="top">2M+</option>
+                </select>
+                
+                <button type="submit" class="search-btn">Search Properties</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="container py-4">
+        <h4>Featured Listings</h4>
+        <div class="scrolling-wrapper">
+            <div class="card">	<a href="listing.html">
+                <img src="https://assets-prd.ignimgs.com/2022/08/03/relic-3-jpg-adapt-1456w-1659567029516.jpg" class="card-img-top" alt="House">
+                <div class="card-body">
+                    <h5 class="card-title">123 Main St.</h5>
+                    <p class="card-text">$550,000 - Toronto, ON</p>
+                    <span class="property-badge">House</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://64.media.tumblr.com/d96852defca3a808ae5833c04a055e40/tumblr_po0mncfRMP1qdqlkxo8_1280.jpg" class="card-img-top" alt="House">
+                <div class="card-body">
+                    <h5 class="card-title">456 Elm St.</h5>
+                    <p class="card-text">$750,000 - Mississauga, ON</p>
+                    <span class="property-badge">Townhouse</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://64.media.tumblr.com/223adcef65faabbbf94ae813dc285e83/tumblr_po0mncfRMP1qdqlkxo7_1280.jpg" class="card-img-top" alt="House">
+                <div class="card-body">
+                    <h5 class="card-title">789 Maple Ave.</h5>
+                    <p class="card-text">$820,000 - Oakville, ON</p>
+                    <span class="property-badge">House</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://cdnb.artstation.com/p/assets/images/images/055/388/855/4k/layne-johnson-m5-eternalgarderns-d-11a.jpg?1666821995" class="card-img-top" alt="Condo">
+                <div class="card-body">
+                    <h5 class="card-title">55 Waterfront Blvd, #802</h5>
+                    <p class="card-text">$495,000 - Toronto, ON</p>
+                    <span class="property-badge">Condo</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/10/Apex-Legends-Encore-Arenas-Map-Tips.jpg?q=50&fit=crop&w=1140&h=&dpr=1.5" class="card-img-top" alt="Townhouse">
+                <div class="card-body">
+                    <h5 class="card-title">22 Village Lane</h5>
+                    <p class="card-text">$675,000 - Burlington, ON</p>
+                    <span class="property-badge">Townhouse</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://cdna.artstation.com/p/assets/images/images/017/207/824/large/hethe-srodawa-military-base-overhang01.jpg?1555041400" class="card-img-top" alt="Apartment">
+                <div class="card-body">
+                    <h5 class="card-title">300 University Ave, #12B</h5>
+                    <p class="card-text">$2,200/month - Hamilton, ON</p>
+                    <span class="property-badge">Apartment</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://64.media.tumblr.com/d453cd015babda8cf96201454e1f1d3c/tumblr_po0mncfRMP1qdqlkxo5_1280.jpg" class="card-img-top" alt="Luxury House">
+                <div class="card-body">
+                    <h5 class="card-title">8 Lakeside Drive</h5>
+                    <p class="card-text">$2,850,000 - Oakville, ON</p>
+                    <span class="property-badge">Luxury</span></a>
+                </div>
+            </div>
+            <div class="card">	<a href="listing.html">
+                <img src="https://cdnb.artstation.com/p/assets/images/images/031/975/183/large/liam-macdonald-estate-s1-lm.jpg?1605119819" class="card-img-top" alt="Cottage">
+                <div class="card-body">
+                    <h5 class="card-title">42 Pine Trail</h5>
+                    <p class="card-text">$725,000 - Muskoka, ON</p>
+                    <span class="property-badge">Cottage</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-dark text-white text-center py-4">
+        &copy; 2025 COSC3P94 |
+
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Site Map</a> |
+
+    </footer>
+
+
+</body>
+
+</html>

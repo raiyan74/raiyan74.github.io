@@ -1,0 +1,165 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sell Your Property - Real Estate Mock Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <!--navbar on top from bootstrap-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">COSC 3P94 RE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="buy.html">Buy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sell.html">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agents.html">Agents</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Resources
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Blog & News</a></li>
+                  <li><a class="dropdown-item" href="#">Real Estate Guides</a></li>
+                  <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+
+    <!-- Sell Page with layered design and centered card -->
+    <div class="sell-page-container">
+        <!-- Background image at z-index 0 -->
+        <div class="background-image" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/032/236/907/4k/richard-rude-richardrude-olympus-001.jpg?1605844328'); background-repeat: repeat-y;"></div>
+
+        <div class="luxury-form-container">
+
+          <h1 class="sell-heading">To get the best value for your property, get connected with an agent</h1>
+          <p class="sell-subheading">Our expertise ensures your luxury property reaches the right buyers at the right price</p>
+
+          <form id="agent-connection-form">
+            <div class="mb-3">
+                <label for="propertyType" class="form-label">Property Type</label>
+                <select class="form-select" id="propertyType" required>
+                    <option value="" selected disabled>Select property type</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="land">Land</option>
+                    <option value="vacation">Vacation Property</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="agentArea" class="form-label">Preferred Agent Area</label>
+                <select class="form-select" id="agentArea" required>
+                    <option value="" selected disabled>Select location</option>
+                    <option value="downtown">Downtown</option>
+                    <option value="north">North End</option>
+                    <option value="west">West Side</option>
+                    <option value="east">East Side</option>
+                    <option value="south">South End</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="agentLanguage" class="form-label">Agent Language</label>
+                <select class="form-select" id="agentLanguage" required>
+                    <option value="" selected disabled>Select language</option>
+                    <option value="english">English</option>
+                    <option value="french">French</option>
+                    <option value="mandarin">Mandarin</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="arabic">Arabic</option>
+                    <option value="hindi">Hindi</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="agentExperience" class="form-label">Agent Experience</label>
+                <select class="form-select" id="agentExperience" required>
+                    <option value="" selected disabled>Select experience level</option>
+                    <option value="5+">5+ years (Senior)</option>
+                    <option value="3-5">3-5 years (Experienced)</option>
+                    <option value="1-3">1-3 years (Mid-level)</option>
+                    <option value="any">Any experience level</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="propertyValue" class="form-label">Estimated Property Value</label>
+                <select class="form-select" id="propertyValue" required>
+                    <option value="" selected disabled>Select value range</option>
+                    <option value="under1m">Under $1 million</option>
+                    <option value="1-2m">$1-2 million</option>
+                    <option value="2-5m">$2-5 million</option>
+                    <option value="5-10m">$5-10 million</option>
+                    <option value="10m+">$10+ million</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="contactInfo" class="form-label">Your Contact Information</label>
+                <input type="text" class="form-control mb-2" id="fullName" placeholder="Full Name" required>
+                <input type="email" class="form-control mb-2" id="email" placeholder="Email Address" required>
+                <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="additionalNotes" class="form-label">Additional Notes</label>
+                <textarea class="form-control" id="additionalNotes" rows="3" placeholder="Tell us more about your property or specific requirements"></textarea>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-submit btn-lg">Connect Me With An Agent</button>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="agents.html" class="btn btn-secondary">Let Me Choose My Agent</a>
+            </div>
+          </form>
+
+        </div>
+
+
+        
+    </div>
+
+
+
+
+
+
+    <footer class="bg-dark text-white text-center py-4">
+        &copy; 2025 COSC3P94 |
+
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Site Map</a> |
+
+    </footer>
+
+</body>
+
+</html>

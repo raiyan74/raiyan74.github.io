@@ -1,0 +1,211 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sell Your Property - Real Estate Mock Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      
+      function handleSubmit(event) {
+          event.preventDefault();
+          const form = event.target;
+          const selectedOption = form.propertyType.value;
+          
+          // Redirect user who selects "house" to sell-regular.html
+          if (selectedOption === 'house' || 'apartment') {
+              window.location.href = 'sell-regular.html';
+          } 
+          // Redirect user who selects "luxury" to....
+          if (selectedOption === 'luxury') {
+            window.location.href = 'sell-luxury.html';
+          }
+
+          if (selectedOption === 'land') {
+            window.location.href = 'sell-land.html';
+          }
+
+          if (selectedOption === 'right-size') {
+            window.location.href = 'sell-rightsize.html';
+          }
+
+          
+
+          
+          else if (selectedOption === 'Property Type') {
+              alert('Please select a property type before proceeding.');
+          }
+          
+          return false;
+      }
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Array of background images
+        const backgroundImages = [
+            'https://cdnb.artstation.com/p/assets/images/images/055/320/243/4k/adam-bodden-industrial-building-large-ext-01.jpg?1666672901',
+            'https://cdnb.artstation.com/p/assets/images/images/050/898/617/large/tomer-meltser-a01.jpg?1655954150',
+            'https://cdnb.artstation.com/p/assets/images/images/049/640/093/large/gavin-bartlett-newwest-rotation.jpg?1652958073',
+            'https://cdnb.artstation.com/p/assets/images/images/045/617/467/large/hans-myaard-canyonlands-01.jpg?1643141446',
+            'https://cdnb.artstation.com/p/assets/images/images/042/952/201/4k/paul-tran-olympus-farms-style-04.jpg?1635885290',
+            'https://cdnb.artstation.com/p/assets/images/images/032/160/039/large/liam-macdonald-farms-002-lm.jpg?1605638919',
+            'https://cdnb.artstation.com/p/assets/images/images/031/908/041/large/liam-macdonald-olympus-liam-lm.jpg?1604946269',
+            'https://cdnb.artstation.com/p/assets/images/images/021/359/711/large/liam-macdonald-circle-building-001.jpg?1571356933',
+            'https://cdnb.artstation.com/p/assets/images/images/021/359/683/large/liam-macdonald-researchdomebuilding-001.jpg?1571356724',
+            'https://cdnb.artstation.com/p/assets/images/images/021/144/649/large/liam-macdonald-trainstation-ext-001.jpg?1570555410',
+            'https://cdna.artstation.com/p/assets/images/images/055/381/762/4k/vladimir-mokry-10.jpg?1666808778',
+            'https://cdna.artstation.com/p/assets/images/images/055/312/294/large/rhiannon-catton-promenade-001.jpg?1666648249',
+            'https://cdna.artstation.com/p/assets/images/images/045/617/720/large/hans-myaard-desertlands-03.jpg?1643141934',
+            'https://cdna.artstation.com/p/assets/images/images/045/617/708/large/hans-myaard-desertlands-01.jpg?1643141920',
+            'https://cdna.artstation.com/p/assets/images/images/045/617/706/large/hans-myaard-desertlands-04.jpg?1643141915',
+            'https://cdna.artstation.com/p/assets/images/images/043/590/534/4k/paul-tran-tropics-presentation-barometer-22.jpg?1637700702',
+            'https://cdna.artstation.com/p/assets/images/images/042/952/184/4k/paul-tran-olympus-farms-style-01.jpg?1635885265',
+            'https://cdna.artstation.com/p/assets/images/images/032/237/120/4k/richard-rude-richardrude-olympus-023.jpg?1605845280',
+            'https://cdna.artstation.com/p/assets/images/images/032/237/112/4k/richard-rude-richardrude-olympus-020.jpg?1605845248',
+            'https://cdna.artstation.com/p/assets/images/images/022/545/718/large/eugene-kim-we2.jpg?1575839020',
+            'https://cdna.artstation.com/p/assets/images/images/016/260/182/4k/paul-tran-zone06-11.jpg?1551495174',
+            'https://cdna.artstation.com/p/assets/images/images/016/259/880/4k/paul-tran-zone06-02.jpg?1551493841'
+        ];
+
+        // Create slide elements dynamically
+        const slideshowContainer = document.querySelector('.background-slideshow');
+        
+        // Clear any existing slides
+        slideshowContainer.innerHTML = '';
+        
+        // Create a slide div for each image
+        backgroundImages.forEach((imageUrl, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'background-slide';
+            slide.style.backgroundImage = `url('${imageUrl}')`;
+            
+            // Make the first slide active initially
+            if (index === 0) {
+                slide.classList.add('active');
+            }
+            
+            slideshowContainer.appendChild(slide);
+        });
+        
+        // Get all slides after they've been created
+        const slides = document.querySelectorAll('.background-slide');
+        let currentIndex = 0;
+        let previousIndex = slides.length - 1;
+        
+        // Function to move to the next slide
+        function nextSlide() {
+            // Remove previous class from the old previous slide
+            slides[previousIndex].classList.remove('previous');
+            
+            // Set current slide as previous
+            slides[currentIndex].classList.remove('active');
+            slides[currentIndex].classList.add('previous');
+            
+            // Save current as previous for next iteration
+            previousIndex = currentIndex;
+            
+            // Move to next slide
+            currentIndex = (currentIndex + 1) % slides.length;
+            
+            // Activate the new current slide
+            slides[currentIndex].classList.add('active');
+        }
+        
+        // Change slide every 3 seconds (1s display + 2s transition)
+        setInterval(nextSlide, 2000);
+    });
+
+    </script>
+    
+</head>
+
+<body>
+
+    <!--navbar on top from bootstrap-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">COSC 3P94 RE</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="buy.html">Buy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sell.html">Sell</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="agents.html">Agents</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Resources
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Blog & News</a></li>
+                  <li><a class="dropdown-item" href="#">Real Estate Guides</a></li>
+                  <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <!-- Sell Page with layered design and centered card -->
+    <div class="sell-page-container">
+
+      <div class="background-slideshow"></div>
+
+      <!-- Background image at z-index 0 
+      <div class="background-image" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/053/636/205/large/mine-ulas-eduardo-agostini-4.jpg?1662659377');"></div>
+      -->
+
+      <!-- Content container at z-index 2 -->
+      <div class="sell-content">
+          <h2 class="sell-title">Answer some questions to get to your selling page</h2>
+          
+          <div class="sell-card">
+              <h3 class="mb-4">What Type of Property are you selling?</h3>
+              <form id="propertyTypeForm" onsubmit="return handleSubmit(event)">
+                  <div class="mb-4">
+                      <select name="propertyType" class="form-select form-select-lg" aria-label="Property Type">
+                          <option selected>Property Type</option>
+                          <option value="house">House</option>
+                          <option value="apartment">Apartment</option>
+                          <option value="luxury">Luxury Property</option>
+                          <option value="right-size">RightSizing</option>
+                          <option value="land">Land/Plot</option>
+                      </select>
+                  </div>
+                  
+                  <div class="text-end">
+                      <button type="submit" class="nxt-btn">Next →</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+    
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        &copy; 2025 COSC3P94 |
+
+        <a href="#">Terms & Conditions</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Site Map</a> |
+
+    </footer>
+
+</body>
+
+</html>
