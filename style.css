@@ -320,10 +320,6 @@ footer a:hover {
     background-size: cover;    /* Image scales to cover the entire area */
     background-position: center; /* Centers the image */
     z-index: 1;                /* Base layer in stacking context */
-
-    
-    image-rendering: -webkit-optimize-contrast; /* For Chrome/Safari */
-    image-rendering: crisp-edges; /* For Firefox */
     
   }
 
