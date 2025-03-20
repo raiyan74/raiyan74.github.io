@@ -755,6 +755,7 @@ hr{
 /*custom styles for sell regular page */
 .sell-regular-page-form-container {
     min-width: 1300px; /* Changed from min-width: 1300px */
+    width: 100%;
     margin: 20px auto;
     padding: 20px;
     position: relative;
@@ -955,6 +956,12 @@ button.submit:hover {
 
 .form-row .form-group {
     flex: 1 1 200px;
+}
+
+@media (max-width: 800px) {
+    .sell-regular-page-form-container {
+        max-width: 500px;
+    }
 }
 
 /* solution for color schema */
