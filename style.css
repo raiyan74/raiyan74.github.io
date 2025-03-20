@@ -1235,3 +1235,17 @@ button.submit:hover {
     margin-right: 8px;
 }
 
+
+/* custom style for right-sizing form */
+
+.right-size-form-container {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+    margin: 3rem auto;
+}
