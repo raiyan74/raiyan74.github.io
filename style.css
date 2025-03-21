@@ -33,12 +33,14 @@ body {
 .nav-link:hover {
     color: #ffffff !important; /* Changes to primary blue on hover */
     background-color: #3498db !important;
+    border-radius: 8px;
 }
 
 .nav-link.active {
     background-color: #3498db !important; /* Highlights the active page */
     color: #ffffff !important; /* Changes to primary blue on hover */
     font-weight: 600;
+    border-radius: 8px;
 }
 
 /* Dropdown Menu Styling */
@@ -1256,3 +1258,4 @@ button.submit:hover {
     width: 100%;
     margin: 3rem auto;
 }
+
