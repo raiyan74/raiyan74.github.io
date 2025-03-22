@@ -21,16 +21,20 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Configuration
+    // Update the config object to simplify connection settings
     const config = {
         starCount: 100,                   // Number of stars
         starSize: { min: 1, max: 3 },     // Size range for stars
         starColor: 'rgba(255, 255, 255, 0.8)',
         lineColor: 'rgba(255, 255, 255, 0.2)',
-        connectionDistance: 90,           // set maximum distance for connections
-        minConnectionDistance: 70,        // set Minimum distance for connections
-        maxConnections: 3,                // Maximum connections per star
+        connectionDistance: 100,          // Fixed connection distance of 100px
+
+        cursorRandomFactor: 0.5,           // How much randomness to add when cursor is active
+        connectionRandomness: true,        // Enable/disable connection randomness
+        randomConnectionThreshold: 150,    // Distance from cursor to activate randomness
+
         movementSpeed: 1,                 // Base speed of star movement
-        attractionFactor: 0.1,           // How strongly stars are attracted to cursor
+        attractionFactor: 0.1,            // How strongly stars are attracted to cursor
         repulsionDistance: 30,            // Distance at which stars start to be repulsed
         maxAttractionDistance: 300,       // Maximum distance for cursor attraction
         velocityDamping: 0.95,            // Damping factor to gradually slow stars after scatter
@@ -60,48 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Calculate connections between stars
+    // Modify the calculateConnections function to remove connections near cursor
     function calculateConnections() {
         connections = [];
         
-        // Reset connection count
-        stars.forEach(star => {
-            star.connections = 0;
-        });
+        // Check if cursor is on screen
+        const cursorActive = mouse.x !== null && mouse.y !== null;
         
-        // Find connections
+        // Check all pairs of stars
         for (let i = 0; i < stars.length; i++) {
-            if (stars[i].connections >= config.maxConnections) continue;
-            
-            // Store potential connections for this star
-            const potentialConnections = [];
-            
-            for (let j = 0; j < stars.length; j++) {
-                if (i === j) continue; // Skip self
-                if (stars[j].connections >= config.maxConnections) continue;
-                
+            for (let j = i + 1; j < stars.length; j++) {
                 const dx = stars[i].x - stars[j].x;
                 const dy = stars[i].y - stars[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                // Check both minimum and maximum distance constraints
-                if (distance >= config.minConnectionDistance && distance < config.connectionDistance) {
-                    potentialConnections.push([j, distance]);
+                // Skip connecting stars near the cursor
+                if (cursorActive) {
+                    // Check if either star is near the cursor
+                    const d1ToCursor = Math.sqrt(Math.pow(stars[i].x - mouse.x, 2) + Math.pow(stars[i].y - mouse.y, 2));
+                    const d2ToCursor = Math.sqrt(Math.pow(stars[j].x - mouse.x, 2) + Math.pow(stars[j].y - mouse.y, 2));
+                    
+                    // If either star is under cursor influence, don't draw the connection
+                    if (d1ToCursor < mouse.radius || d2ToCursor < mouse.radius) {
+                        continue; // Skip this pair entirely
+                    }
                 }
-            }
-            
-            // Sort by distance (prefer closer connections)
-            potentialConnections.sort((a, b) => a[1] - b[1]);
-            
-            // Take only the closest connections up to max
-            const connectionCount = Math.min(potentialConnections.length, config.maxConnections - stars[i].connections);
-            for (let k = 0; k < connectionCount; k++) {
-                const j = potentialConnections[k][0];
-                const distance = potentialConnections[k][1];
                 
-                if (stars[j].connections < config.maxConnections) {
+                // Connect if within the connection distance (and not near cursor)
+                if (distance < config.connectionDistance) {
                     connections.push([i, j, distance]);
-                    stars[i].connections++;
-                    stars[j].connections++;
                 }
             }
         }
@@ -114,24 +105,35 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         // Draw connections
-        ctx.strokeStyle = config.lineColor;
-        ctx.lineWidth = 1;
         
         connections.forEach(connection => {
             const star1 = stars[connection[0]];
             const star2 = stars[connection[1]];
             const distance = connection[2];
             
-            // Fade lines based on distance
-            const opacity = Math.max(0.1, 0.2 * (1 - (distance - config.minConnectionDistance) / (config.connectionDistance - config.minConnectionDistance)));
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
+            // Calculate base opacity
+            let opacity = 0.2 * (1 - distance / config.connectionDistance);
             
+            // Add subtle pulsing effect to lines affected by cursor
+            if (mouse.x !== null && mouse.y !== null) {
+                const d1ToCursor = Math.sqrt(Math.pow(star1.x - mouse.x, 2) + Math.pow(star1.y - mouse.y, 2));
+                const d2ToCursor = Math.sqrt(Math.pow(star2.x - mouse.x, 2) + Math.pow(star2.y - mouse.y, 2));
+                
+                if (d1ToCursor < config.randomConnectionThreshold || d2ToCursor < config.randomConnectionThreshold) {
+                    // Add subtle pulsing to affected connections
+                    opacity *= 0.7 + 0.3 * Math.sin(Date.now() / 300 + connection[0] * connection[1]);
+                }
+            }
+            
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            
+            // Draw the line
             ctx.beginPath();
             ctx.moveTo(star1.x, star1.y);
             ctx.lineTo(star2.x, star2.y);
             ctx.stroke();
         });
-        
+            
         // Draw stars
         ctx.fillStyle = config.starColor;
         stars.forEach(star => {
@@ -140,15 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ctx.fill();
         });
         
-        // Draw cursor influence circle (for debugging, can be removed)
-        /*
-        if (mouse.x !== null && mouse.y !== null) {
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(100, 100, 255, 0.1)';
-            ctx.stroke();
-        }
-        */
+        
     }
     
     // Update star positions with cursor attraction
