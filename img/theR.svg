@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650.511" height="651.388" viewBox="0 0 742 743">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 64.72px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M256,210L177,419l-64,15s-2.207-.182-2,1c0.533,3.047-3,201-3,201s78.157-97.6,80-96c0.844,3.1,65-8,65-8l-8-51,35-98L400,497l9,54,77,5,70,84-1-182-85-23-21-17-99-92L634,153,131,51Z"/>
+</svg>

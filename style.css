@@ -6,21 +6,18 @@
     --secondary-color: #adb5c7; /* Lighter secondary text */
     --light-accent: #272752; /* Darker accent for tags */
     --card-bg: rgba(20, 20, 40, 0.5); /* Slightly transparent dark card background */
+    --purple-circle: #6f78c3; /* Color for the circles in the new layout */
+    --dotted-line-color: rgba(255, 255, 255, 0.5); /* Color for the dotted line */
+    --footer-bar-color: #414b7c; /* Color for the fixed footer bar */
+    --language-btn-bg: #1e2231; /* Background for language buttons */
+    --language-btn-active-bg: #6f78c3; /* Active background for language buttons */
 }
 
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    padding: 0;
-    margin: 0;
 }
 
 /* Canvas Background */
@@ -43,268 +40,313 @@ a:hover {
     opacity: 0.8;
 }
 
+/* Basic Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color); /* Example background color */
+    color: white; /* Example text color */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    line-height: 1.6;
+}
+
 /* Container */
 .container {
-    max-width: 1100px;
+    width: 80vw;
     margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 1;
+    padding: 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header */
 header {
-    padding: 60px 0 40px;
-}
-
-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 1rem 0;
 }
 
+/* Keep the .logo flex container styles */
 .logo {
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.5px;
+    display: flex; /* Keeps the header as a flex container */
+    align-items: center; /* Vertically centers the SVG within the logo area */
+    /* gap: 1rem; */ /* This gap will no longer have an effect as there's only one child */
 }
 
-.nav-links {
-    display: flex;
-    gap: 32px;
+/* Add a style for the SVG image inside the logo container */
+.logo img {
+    /* Set the size of the SVG - matching the old logo-circle size */
+    width: 3.75rem; /* Sets the width using relative units (60px / 16px = 3.75) */
+    height: 3.75rem; /* Sets the height using relative units (60px / 16px = 3.75) */
+    display: block; /* Good practice for images */
+    /* Optional: object-fit can help if your SVG isn't exactly square but you want it contained */
+    /* object-fit: contain; */
 }
 
-.nav-links a {
-    font-size: 0.95rem;
+.nav a {
+    color: var(--text-color);
+    text-decoration: none;
     font-weight: 500;
-}
-
-/* Hero Section */
-.hero {
-    padding: 100px 0 60px;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
     align-items: center;
+    gap: 0.3rem;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.1;
+/* Main content */
+main {
+    flex: 1; /* Allows the main content to grow and occupy available space in the flex container (body/container) */
+    display: flex; /* Enables flexbox layout for direct children */
+    align-items: center; /* Aligns direct children vertically in the center */
+    justify-content: space-between; /* Distributes space between direct children */
+    padding: 2rem 0; /* Adds vertical inner space (padding) using relative units */
+    gap: 1.5rem;
+
+    
 }
 
-.hero p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    color: var(--secondary-color);
+.content {
+    width: 27vw;
+
+    font-weight: 300;
 }
 
-/* Section Styles */
-section {
-    padding: 80px 0;
+.profile-info {
+    width: 27vw;
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+    padding-left: 0.5rem;
 }
 
-.section-title {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+.profile-description {
+    border-top: 0.06rem dotted var(--dotted-line-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
-/* Project Grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.project-card {
-    background: rgba(30, 30, 60, 0.6);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.project-image {
-    height: 180px;
-    background-color: var(--light-accent);
+.profile-image-container {
     position: relative;
-    overflow: hidden;
-}
+    
+    /* Ensure this container is square - this is key for the child image to form a perfect circle */
+    aspect-ratio: 1 / 1;
+    /* Adjust width for flexibility in flex row */
+    /* Use max-width here to control the size in the main layout */
+    max-width: 27vw; /* Retained vw for initial layout, acts as a max size */
+    width: 100%; /* Allow it to shrink below max-width if container is smaller */
 
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    /* Ensure it can shrink */
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 0;
 
-.project-content {
-    padding: 20px;
-}
-
-.project-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.tag {
-    font-size: 0.75rem;
-    background-color: var(--light-accent);
-    padding: 4px 10px;
-    border-radius: 20px;
-    color: var(--accent-color);
-    font-weight: 500;
-}
-
-.project-description {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-}
-
-/* Photography Section */
-.photo-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.photo-item {
-    position: relative;
-    height: 250px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--light-accent);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.photo-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.photo-item:hover img {
-    transform: scale(1.05);
-}
-
-/* Contact Section */
-.contact-section {
-    background-color: rgba(30, 30, 60, 0.6);
-    border-radius: 12px;
-    padding: 60px;
-    text-align: center;
-    margin: 80px 0;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.contact-section h2 {
-    margin-bottom: 20px;
-}
-
-.social-links {
+    /* Center the image container itself within the main flex container */
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 30px;
+    align-items: center;
+
+    /* Use aspect-ratio to maintain square shape based on the calculated width */
+    aspect-ratio: 1 / 1; /* Maintains a 1:1 aspect ratio */
+}
+
+.profile-image img {
+    display: block; /* Recommended for images */
+    /* Set a maximum size directly on the image */
+    max-width: 20rem; /* Example max width */
+    max-height: 20rem; /* Example max height */
+    /* Ensure it doesn't exceed its container's bounds if container is smaller */
+    width: 100%;
+    height: 100%;
+    /* Keep the properties from the container if you want the circular shape and cropping */
+    border-radius: 50%; /* You might need to apply this to the img if it was only on the container */
+    object-fit: cover; /* Keep this for cropping */
+}
+
+/* Name section */
+.name-section {
+    min-width: 27vw;
+    font-size: 4rem; /* Sets the font size using relative units */
+    font-weight: 400; /* Sets the font weight */
+    line-height: 1; /* Sets the spacing between lines of text */
+    margin-bottom: 0.5rem; /* Adds outer space (margin) below the element using relative units */
+}
+
+.name-section h1 {
+    font-size: 4rem;
+    font-weight: 100;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.name-section .subtitle {
+    font-size: 1rem;
+    font-weight: 50;
+    border-top: 0.0625rem dotted var(--dotted-line-color);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: right;
+}
+
+/* Social links */
+.social-links {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+    
 }
 
 .social-link {
-    font-size: 1rem;
-    font-weight: 500;
+    width: 1.875rem; /* Sets the width using relative units (30px / 16px = 1.875) */
+    height: 1.875rem; /* Sets the height using relative units (30px / 16px = 1.875) */
+    background-color: var(--social-link-bg); /* Applies the social link background color from the CSS variable */
+    border-radius: 50%; /* Creates a perfect circle */
+    display: flex; /* Enables flexbox layout for centering content inside the link */
+    align-items: center; /* Aligns content vertically in the center */
+    justify-content: center; /* Aligns content horizontally in the center */
+    color: var(--text-color); /* Applies the text color from the CSS variable */
+    text-decoration: none; /* Removes the default underline from links */
+    font-size: 0.875rem; /* Sets the font size for the icon/text inside using relative units */
 }
 
 /* Footer */
 footer {
+    /*background-color: var(--footer-bar-color);*/
+    padding: 1rem 0;
+    margin-top: auto;
+    /* Added styles from previous style.css for consistency */
     text-align: center;
-    padding: 40px 0;
-    color: var(--secondary-color);
-    font-size: 0.9rem;
 }
 
-/* Achievements Section */
-.achievements-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.achievement-item {
-    background: rgba(30, 30, 60, 0.6);
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
-}
-
-.achievement-item:hover {
-    transform: translateY(-3px);
-}
-
-.achievement-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.achievement-year {
-    font-size: 0.85rem;
-    color: var(--accent-color);
-    margin-bottom: 15px;
-    font-weight: 500;
-}
-
-.achievement-description {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+/*
+  Responsive styles for smaller screens
+*/
+@media (max-width: 48rem) {
+    main {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        justify-content: center;
+        align-items: center;
     }
-    
-    .contact-section {
-        padding: 40px 20px;
+
+    /* Adjust direct children of main in column layout */
+    main > .content,
+    main > .profile-image-container,
+    main > .name-section {
+        width: 100%; /* Make them take full width in column layout */
+        max-width: 100%; /* Ensure they don't exceed container width */
+        flex-basis: auto;
+        flex-grow: 0;
+        flex-shrink: 1;
+        min-width: 0;
+        margin-left: 0;
+        margin-right: 0;
     }
-    
-    .section-title {
-        font-size: 1.8rem;
+
+    /* Adjust the profile image container in column layout */
+    .profile-image-container {
+        /* Control size with a percentage of viewport width */
+        width: 50vw; /* Example: 50% of viewport width */
+        /* Set a maximum size */
+        max-width: 15.625rem;
+        /* Keep aspect-ratio to ensure square shape based on the set width */
+        aspect-ratio: 1 / 1; /* Explicitly keep aspect ratio */
+
+        /* Remove explicit height setting, aspect-ratio handles it */
+        height: auto; /* Allow height to be determined by aspect-ratio */
+        max-height: none; /* Remove max-height as width/aspect-ratio control size */
+
+        margin-bottom: 1.25rem;
     }
+
+    /* The image and background should still fill their container which is now square */
+    .profile-image,
+    .profile-image-bg {
+        width: 100%;
+        height: 100%;
+        max-width: unset;
+        max-height: unset;
+        flex-shrink: 0;
+    }
+
+    /* ... rest of your @media (max-width: 48rem) styles ... */
+     .profile-image-bg {
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 105%;
+         height: 105%;
+     }
+
+
+     .profile-info {
+         padding-left: 0;
+         text-align: center;
+     }
+
+
+     .name-section {
+         text-align: center;
+         min-width: unset;
+     }
+
+     .name-section h1 {
+         font-size: 3rem;
+     }
+
+     .name-section .subtitle {
+         text-align: center;
+     }
+
+     .social-links {
+         justify-content: center;
+         align-items: center;
+     }
 }
 
-@media (max-width: 480px) {
-    .hero h1 {
+/*
+  Responsive styles for very small screens
+*/
+@media (max-width: 30rem) {
+    .name-section h1 {
         font-size: 2rem;
     }
-    
-    .nav-links {
-        gap: 15px;
+
+    .nav a {
+        gap: 0.625rem;
     }
-    
-    .section-title {
-        font-size: 1.5rem;
+
+    /* Further adjust the profile image container size on very small screens */
+    .profile-image-container {
+        width: 60vw; /* Example: 60% of viewport width */
+        max-width: 12.5rem; /* Further adjusted max size */
+        /* Keep aspect-ratio */
+        aspect-ratio: 1 / 1;
+        /* Remove explicit height setting */
+        height: auto;
+        max-height: none; /* Remove max-height */
+    }
+
+    /* The image and background should still fill their container */
+    .profile-image,
+    .profile-image-bg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-image-bg {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 105%;
+        height: 105%;
+    }
+
+    .container {
+        padding: 1rem;
     }
 }
