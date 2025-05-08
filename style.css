@@ -107,6 +107,9 @@ main {
     padding: 2rem 0; /* Adds vertical inner space (padding) using relative units */
     gap: 1.5rem;
 
+    /* Ensure wrapping if content overflows horizontally before hitting media query */
+    flex-wrap:nowrap; /* Added for robustness */
+    justify-content: center; /* Center items when wrapped */
     
 }
 
@@ -139,7 +142,7 @@ main {
     display: flex;
     flex-direction: column; /* Stack its children (image and buttons) vertically */
     align-items: center; /* Center the children horizontally within this container */
-    gap: 5rem; /* Add space between the image container and the buttons */
+    gap: 2.5rem; /* Add space between the image container and the buttons */
     /* Inherit or set width properties as needed for the main flex layout */
      max-width: 27vw; /* Example: Match the previous image container width */
      width: 100%; /* Allow it to shrink */
@@ -170,7 +173,7 @@ main {
     flex-direction: row;
     justify-content: center; /* Center the buttons horizontally */
     gap: 1rem; /* Add space between buttons */
-    margin-top: 1rem; /* Add space above the buttons */
+    margin-top: 0rem; /* Add space above the buttons */
     /* Adjust width as needed, perhaps matching the image container width */
     max-width: 27vw; /* Example: Match image container width */
     width: 100%; /* Allow shrinking on smaller screens */
@@ -180,7 +183,7 @@ main {
 .image-button {
     background-color: var(--social-link-bg, #1e2231); /* Use a similar background to social links or define a new variable */
     border: none; /* Remove default button border */
-    padding: 0.5rem; /* Add some padding inside the button */
+    padding: 1rem; /* Add some padding inside the button */
     cursor: pointer; /* Indicate it's clickable */
     display: flex; /* Use flexbox to center the icon */
     justify-content: center; /* Center icon horizontally */
@@ -271,24 +274,26 @@ main {
     text-align: right;
 }
 
-/* Social links */
+/* Social links change to affect the items inside this container(all the ICONS) */
 .social-links {
     display: flex;
-    align-items: left;
-    gap: 1rem;
+    justify-content: left;
+    flex-direction: row;
+    
+    gap: 2rem;
+    margin: 0.5rem;
+    
     
 }
 
-.social-link {
-    width: 1.875rem; /* Sets the width using relative units (30px / 16px = 1.875) */
-    height: 1.875rem; /* Sets the height using relative units (30px / 16px = 1.875) */
-    background-color: var(--social-link-bg); /* Applies the social link background color from the CSS variable */
-    border-radius: 50%; /* Creates a perfect circle */
-    display: flex; /* Enables flexbox layout for centering content inside the link */
-    align-items: center; /* Aligns content vertically in the center */
-    justify-content: center; /* Aligns content horizontally in the center */
+.social-link svg{
+    width: 1rem; /* Sets the width using relative units (30px / 16px = 1.875) */
+    height: 1rem; /* Sets the height using relative units (30px / 16px = 1.875) */
+    
+    
+    
     color: var(--text-color); /* Applies the text color from the CSS variable */
-    text-decoration: none; /* Removes the default underline from links */
+    
     font-size: 0.875rem; /* Sets the font size for the icon/text inside using relative units */
 }
 
@@ -299,84 +304,14 @@ footer {
     margin-top: auto;
     /* Added styles from previous style.css for consistency */
     text-align: center;
+    font-size: 0.9rem;
+    font-weight: 10;
 }
 
 /*
   Responsive styles for smaller screens
 */
-@media (max-width: 48rem) {
-    main {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-        justify-content: center;
-        align-items: center;
-    }
 
-    /* Adjust direct children of main in column layout */
-    main > .content,
-    main > .profile-image-container,
-    main > .name-section {
-        width: 100%; /* Make them take full width in column layout */
-        max-width: 100%; /* Ensure they don't exceed container width */
-        flex-basis: auto;
-        flex-grow: 0;
-        flex-shrink: 1;
-        min-width: 0;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    /* Adjust the profile image container in column layout */
-    .profile-image-container {
-        /* Control size with a percentage of viewport width */
-        width: 50vw; /* Example: 50% of viewport width */
-        /* Set a maximum size */
-        max-width: 15.625rem;
-        /* Keep aspect-ratio to ensure square shape based on the set width */
-        aspect-ratio: 1 / 1; /* Explicitly keep aspect ratio */
-
-        /* Remove explicit height setting, aspect-ratio handles it */
-        height: auto; /* Allow height to be determined by aspect-ratio */
-        max-height: none; /* Remove max-height as width/aspect-ratio control size */
-
-        margin-bottom: 1.25rem;
-    }
-
-    /* The image and background should still fill their container which is now square */
-    .profile-image {
-        width: 100%;
-        height: 100%;
-        max-width: unset;
-        max-height: unset;
-        flex-shrink: 0;
-    }
-
-
-     .profile-info {
-         padding-left: 0;
-         text-align: center;
-     }
-
-
-     .name-section {
-         text-align: center;
-         min-width: unset;
-     }
-
-     .name-section h1 {
-         font-size: 3rem;
-     }
-
-     .name-section .subtitle {
-         text-align: center;
-     }
-
-     .social-links {
-         justify-content: center;
-         align-items: center;
-     }
-}
 
 /*
   Responsive styles for very small screens
@@ -390,24 +325,57 @@ footer {
         gap: 0.625rem;
     }
 
+    main {
+
+        flex-direction: column-reverse;
+        
+    }
+
     /* Further adjust the profile image container size on very small screens */
     .profile-image-container {
-        width: 60vw; /* Example: 60% of viewport width */
-        max-width: 12.5rem; /* Further adjusted max size */
-        /* Keep aspect-ratio */
+        width: 80vw; /* Slightly larger percentage on very small screens */
+        max-width: 10rem; /* Further adjusted max size */
         aspect-ratio: 1 / 1;
-        /* Remove explicit height setting */
         height: auto;
-        max-height: none; /* Remove max-height */
+        max-height: none;
     }
 
-    /* The image and background should still fill their container */
-    .profile-image {
-        width: 100%;
-        height: 100%;
+    .top-adjust-box{
+        height: 0vh;
     }
 
-    .container {
-        padding: 1rem;
+    /* Ensure main children take full width on very small screens */
+     main > .content,
+     main > .profile-image-container,
+     main > .name-section,
+     .image-and-buttons-container,
+     .image-buttons,
+     .profile-info,
+     .name-section,
+     .social-links
+      {
+         width: 95%; /* Use a larger percentage for very narrow screens */
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .social-links {
+        justify-content: center;
+     }
+
+     .profile-info p {
+        text-align: center;
+     }
+
+     .name-section h1 {
+        text-align: center;
+     }
+
+     /* Make footer text smaller on very small screens */
+     footer {
+        
+        font-size: 0.7rem; /* Adjust this value as needed for phone size */
+        padding: 0.001rem;
     }
+
 }
