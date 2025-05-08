@@ -86,6 +86,7 @@ header {
     display: block; /* Good practice for images */
     /* Optional: object-fit can help if your SVG isn't exactly square but you want it contained */
     /* object-fit: contain; */
+    opacity: 0.7;
 }
 
 .nav a {
@@ -120,12 +121,83 @@ main {
     font-size: 1rem;
     margin-bottom: 0.1rem;
     padding-left: 0.5rem;
+    margin-top: 10px;
 }
 
 .profile-description {
     border-top: 0.06rem dotted var(--dotted-line-color);
     padding-top: 1rem;
     margin-top: 1rem;
+}
+
+/* New container to hold the image and buttons vertically */
+.image-and-buttons-container {
+    display: flex;
+    flex-direction: column; /* Stack its children (image and buttons) vertically */
+    align-items: center; /* Center the children horizontally within this container */
+    gap: 5rem; /* Add space between the image container and the buttons */
+    /* Inherit or set width properties as needed for the main flex layout */
+     max-width: 27vw; /* Example: Match the previous image container width */
+     width: 100%; /* Allow it to shrink */
+
+    /* Ensure it can shrink within the main flex container */
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.top-adjust-box{
+
+    display: flex; /* Arrange buttons in a row */
+    flex-direction: row;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 1rem; /* Add space between buttons */
+    margin-top: 1rem; /* Add space above the buttons */
+    /* Adjust width as needed, perhaps matching the image container width */
+    max-width: 27vw; /* Example: Match image container width */
+    width: 100%; /* Allow shrinking on smaller screens */
+    height: 5vh;
+}
+
+/* Styles for the new image buttons container */
+.image-buttons {
+    display: flex; /* Arrange buttons in a row */
+    flex-direction: row;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 1rem; /* Add space between buttons */
+    margin-top: 1rem; /* Add space above the buttons */
+    /* Adjust width as needed, perhaps matching the image container width */
+    max-width: 27vw; /* Example: Match image container width */
+    width: 100%; /* Allow shrinking on smaller screens */
+}
+
+/* Styles for the individual image buttons */
+.image-button {
+    background-color: var(--social-link-bg, #1e2231); /* Use a similar background to social links or define a new variable */
+    border: none; /* Remove default button border */
+    padding: 0.5rem; /* Add some padding inside the button */
+    cursor: pointer; /* Indicate it's clickable */
+    display: flex; /* Use flexbox to center the icon */
+    justify-content: center; /* Center icon horizontally */
+    align-items: center; /* Center icon vertically */
+    width: 4rem; /* Set a fixed size for the square button */
+    height: 4rem; /* Set a fixed size for the square button */
+    border-radius: 0.5rem; /* Optional: Add slightly rounded corners */
+    transition: opacity 0.3s ease; /* Add a subtle hover effect */
+    opacity: 0.7;
+}
+
+.image-button:hover {
+    opacity: 0.8;
+    background-color: #898c96;
+}
+
+.image-button img {
+    display: block; /* Ensure the image is a block element */
+    max-width: 100%; /* Make sure the icon fits within the button */
+    max-height: 100%; /* Make sure the icon fits within the button */
+    object-fit: contain; /* Scale the image to fit without distortion */
 }
 
 .profile-image-container {
@@ -166,13 +238,15 @@ main {
     object-fit: cover; /* Keep this for cropping */
 }
 
+
+
 /* Name section */
 .name-section {
     min-width: 27vw;
     font-size: 4rem; /* Sets the font size using relative units */
     font-weight: 400; /* Sets the font weight */
     line-height: 1; /* Sets the spacing between lines of text */
-    margin-bottom: 0.5rem; /* Adds outer space (margin) below the element using relative units */
+    
 }
 
 .name-section h1 {
@@ -180,12 +254,13 @@ main {
     font-weight: 100;
     line-height: 1;
     margin-bottom: 0.5rem;
+    
 }
 
 .name-section .subtitle {
     font-size: 1rem;
     font-weight: 50;
-    border-top: 0.0625rem dotted var(--dotted-line-color);
+    
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     text-align: right;
@@ -264,23 +339,13 @@ footer {
     }
 
     /* The image and background should still fill their container which is now square */
-    .profile-image,
-    .profile-image-bg {
+    .profile-image {
         width: 100%;
         height: 100%;
         max-width: unset;
         max-height: unset;
         flex-shrink: 0;
     }
-
-    /* ... rest of your @media (max-width: 48rem) styles ... */
-     .profile-image-bg {
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         width: 105%;
-         height: 105%;
-     }
 
 
      .profile-info {
@@ -332,18 +397,9 @@ footer {
     }
 
     /* The image and background should still fill their container */
-    .profile-image,
-    .profile-image-bg {
+    .profile-image {
         width: 100%;
         height: 100%;
-    }
-
-    .profile-image-bg {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 105%;
-        height: 105%;
     }
 
     .container {
