@@ -317,10 +317,17 @@ footer {
   Responsive styles for very small screens
 */
 @media (max-width: 30rem) {
+
     .name-section h1 {
         font-size: 2rem;
     }
 
+    .name-section .subtitle {
+
+        font-size: 0.7rem;
+    
+        text-align: center;
+    }
     .nav a {
         gap: 0.625rem;
     }
@@ -333,7 +340,7 @@ footer {
 
     /* Further adjust the profile image container size on very small screens */
     .profile-image-container {
-        width: 80vw; /* Slightly larger percentage on very small screens */
+        width: 90vw; /* Slightly larger percentage on very small screens */
         max-width: 10rem; /* Further adjusted max size */
         aspect-ratio: 1 / 1;
         height: auto;
