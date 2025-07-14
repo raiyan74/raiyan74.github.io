@@ -1,0 +1,174 @@
+/*
+  archive.html
+*/
+
+/* Base Styles from style.css */
+:root {
+    --bg-color: #0f0f23; /* Dark blue background like diogotc.com */
+    --text-color: #f0f0f0; /* Light text for dark background */
+    --accent-color: #8A8AFF; /* Lighter blue accent */
+    --secondary-color: #adb5c7; /* Lighter secondary text */
+    --light-accent: #272752; /* Darker accent for tags */
+    --card-bg: rgba(20, 20, 40, 0.5); /* Slightly transparent dark card background */
+    --purple-circle: #6f78c3; /* Color for the circles in the new layout */
+    --dotted-line-color: rgba(255, 255, 255, 0.5); /* Color for the dotted line */
+    --footer-bar-color: #414b7c; /* Color for the fixed footer bar */
+    --language-btn-bg: #1e2231; /* Background for language buttons */
+    --language-btn-active-bg: #6f78c3; /* Active background for language buttons */
+}
+
+/* Reset and base styles from style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Canvas Background from style.css */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* Basic Styles from style.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', 'Roboto', 'Helvetica Neue', HelveticaNeue, Helvetica, 'TeXGyreHeros', 'FreeSans', 'Nimbus Sans L', 'Liberation Sans', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Container from style.css */
+.container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header from style.css */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+/* Keep the .logo flex container styles from style.css */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Add a style for the SVG image inside the logo container from style.css */
+.logo img {
+    width: 3.75rem;
+    height: 3.75rem;
+    display: block;
+    opacity: 0.7;
+}
+
+.nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Footer from style.css */
+footer {
+    padding: 1rem 0;
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 10;
+}
+
+
+/* Archive Page Specific Styles (Original content of galleryStyle.css) */
+main.photo-gallery {
+    display: flex; /* Change to flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 0; /* Remove gap if using margin-bottom for finer control */
+    padding: 2rem 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.photo-item {
+    overflow: hidden;
+    width: 90%; /* Set a relative width for each photo item */
+    max-width: 800px; /* Optional: Set a maximum width for larger screens */
+    margin-bottom: 1.5rem; /* Space between each photo item */
+    /* Add padding if you want space inside the photo-item before the image/iframe */
+    /* padding: 0.5rem; */ /* Example */
+    background-color: transparent; /* Ensure no background that adds unwanted space */
+}
+
+/* Remove margin-bottom from the last photo-item to prevent excess space at the end */
+.photo-item:last-child {
+    margin-bottom: 0;
+}
+
+.photo-item iframe,
+.photo-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: none;
+    overflow: hidden;
+    /* Ensure no extra padding/margin on the images/iframes themselves */
+}
+
+/* Responsive styles for very small screens from style.css */
+@media (max-width: 30rem) {
+
+    .nav a {
+        gap: 0.625rem;
+    }
+
+    /* Ensure main children take full width on very small screens, adjusted for archive */
+     .container {
+         width: 95%; /* Use a larger percentage for very narrow screens */
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     main.photo-gallery {
+        padding: 1rem 0.5rem; /* Reduce overall padding on smaller screens */
+    }
+    .photo-item {
+        width: 95%; /* Make photos a bit wider on very small screens */
+        margin-bottom: 1rem; /* Slightly less space on smaller screens */
+    }
+
+     /* Make footer text smaller on very small screens */
+     footer {
+        font-size: 0.7rem; /* Adjust this value as needed for phone size */
+        padding: 0.001rem;
+    }
+}
