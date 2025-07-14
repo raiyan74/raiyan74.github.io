@@ -108,34 +108,43 @@ main {
     gap: 1.5rem;
 
     /* Ensure wrapping if content overflows horizontally before hitting media query */
-    flex-wrap:nowrap; /* Added for robustness */
-    justify-content: center; /* Center items when wrapped */
-    
+    flex-wrap: nowrap; /* Ensures they stay in a row unless media query breaks them */
+    /* Removed: justify-content: center; // For wide layout, space-between is better */
 }
 
 .content {
     width: 27vw;
-
     font-weight: 300;
+    display: flex; /* Make .content a flex container */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Vertically center content within .content */
+    align-items: flex-end; /* Align items to the right within .content to accommodate the line */
+    position: relative; /* For absolute positioning of pseudo-element */
+    flex: 1;
 }
 
 .profile-info {
-    width: 27vw;
+    width: 100%; /* Ensure it takes full width of .content */
     font-size: 1rem;
     margin-bottom: 0.1rem;
     padding-left: 0.5rem;
     margin-top: 10px;
+    text-align: right; /* Keep text aligned right */
 }
 
 .profile-info p {
     text-align: right;
 }
 
+/* Removed/Modified: Old .profile-description border and padding */
 .profile-description {
-    border-top: 0.06rem dotted var(--dotted-line-color);
-    padding-top: 1rem;
-    margin-top: 1rem;
+    border-top: none; /* Remove this */
+    padding-top: 0; /* Remove this */
+    margin-top: 0; /* Remove this */
+    visibility: hidden; /* Hide the empty div */
+    height: 0; /* Collapse its height */
 }
+
 
 /* New container to hold the image and buttons vertically */
 .image-and-buttons-container {
@@ -155,7 +164,6 @@ main {
 }
 
 .top-adjust-box{
-
     display: flex; /* Arrange buttons in a row */
     flex-direction: row;
     justify-content: center; /* Center the buttons horizontally */
@@ -164,7 +172,7 @@ main {
     /* Adjust width as needed, perhaps matching the image container width */
     max-width: 27vw; /* Example: Match image container width */
     width: 100%; /* Allow shrinking on smaller screens */
-    height: 5vh;
+    height: 5.5vh;
 }
 
 /* Styles for the new image buttons container */
@@ -246,54 +254,59 @@ main {
 }
 
 
-
 /* Name section */
 .name-section {
-    min-width: 27vw;
+    width: 27vw;
     font-size: 4rem; /* Sets the font size using relative units */
     font-weight: 400; /* Sets the font weight */
     line-height: 1; /* Sets the spacing between lines of text */
-    
+    display: flex; /* Make .name-section a flex container */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Vertically center content within .name-section */
+    align-items: flex-start; /* Align items to the left within .name-section */
+    position: relative; /* For absolute positioning of pseudo-element */
+    flex: 1;
 }
 
 .name-section h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 100;
     line-height: 1;
-    margin-bottom: 0.5rem;
-    text-align: left;
     
+    text-align: left; /* Keep text aligned left */
+    flex: 1;
 }
 
-.name-section .subtitle {
-    font-size: 1rem;
-    font-weight: 50;
-    
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    text-align: right;
+/* Removed/Modified: Old .profile-description border and padding for name section */
+.name-section .profile-description { /* Target this specific one */
+    border-top: none; /* Remove this */
+    padding-top: 0; /* Remove this */
+    margin-top: 0; /* Remove this */
+    visibility: hidden; /* Hide the empty div */
+    height: 0; /* Collapse its height */
+}
+
+/* REMOVED: Dotted line from .name-section by setting display to none */
+.name-section::before {
+    display: none;
 }
 
 /* Social links change to affect the items inside this container(all the ICONS) */
 .social-links {
     display: flex;
-    justify-content: left;
+    justify-content: flex-end; /* MODIFIED: Align icons to the right */
     flex-direction: row;
-    
     gap: 2rem;
-    margin: 0.5rem;
-    
-    
+    margin: 0.5rem 0;
+    width: 100%; /* ADDED: Ensure line spans the full width of the container */
+    padding-top: 1rem; /* ADDED: Add space between the line and the icons */
+    border-top: 0.06rem dotted var(--dotted-line-color); /* ADDED: The new dotted line */
 }
 
 .social-link svg{
     width: 1rem; /* Sets the width using relative units (30px / 16px = 1.875) */
     height: 1rem; /* Sets the height using relative units (30px / 16px = 1.875) */
-    
-    
-    
     color: var(--text-color); /* Applies the text color from the CSS variable */
-    
     font-size: 0.875rem; /* Sets the font size for the icon/text inside using relative units */
 }
 
@@ -323,9 +336,7 @@ footer {
     }
 
     .name-section .subtitle {
-
         font-size: 0.7rem;
-    
         text-align: center;
     }
     .nav a {
@@ -333,9 +344,7 @@ footer {
     }
 
     main {
-
         flex-direction: column-reverse;
-        
     }
 
     /* Further adjust the profile image container size on very small screens */
@@ -368,6 +377,7 @@ footer {
 
      .social-links {
         justify-content: center;
+        border-top: none; /* Hide the line on mobile */
      }
 
      .profile-info p {
@@ -378,11 +388,17 @@ footer {
         text-align: center;
      }
 
+     /* Adjust pseudo-elements for small screens */
+     .profile-info::before,
+     .name-section::before {
+        display: none; /* Hide lines on very small screens if they look bad */
+        /* Or adjust their width/position if you want to keep them */
+     }
+
+
      /* Make footer text smaller on very small screens */
      footer {
-        
         font-size: 0.7rem; /* Adjust this value as needed for phone size */
         padding: 0.001rem;
     }
-
 }
