@@ -73,6 +73,9 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    width: 77vw;
+    position: fixed;
+    background-color: transparent;
 }
 
 /* Keep the .logo flex container styles from style.css */

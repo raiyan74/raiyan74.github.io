@@ -329,14 +329,17 @@ footer {
 */
 @media (max-width: 30rem) {
 
-    .name-section h1 {
-        font-size: 2rem;
+    .name-section {
+        align-items: center; /* This will now center children (like h1) horizontally */
     }
 
-    .name-section .subtitle {
-        font-size: 0.7rem;
-        text-align: center;
+    .name-section h1 {
+        font-size: 2rem;
+        text-align: center; /* !important should no longer be strictly needed, but can stay */
+        
     }
+
+    
     .nav a {
         gap: 0.625rem;
     }
@@ -382,16 +385,9 @@ footer {
         text-align: center;
      }
 
-     .name-section h1 {
-        text-align: center;
-     }
-
      /* Adjust pseudo-elements for small screens */
      .profile-info::before,
-     .name-section::before {
-        display: none; /* Hide lines on very small screens if they look bad */
-        /* Or adjust their width/position if you want to keep them */
-     }
+     
 
 
      /* Make footer text smaller on very small screens */
