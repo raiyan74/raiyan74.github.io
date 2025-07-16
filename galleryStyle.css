@@ -111,30 +111,51 @@ footer {
 }
 
 
-/* Archive Page Specific Styles (Original content of galleryStyle.css) */
+/* Archive Page Specific Styles (Original content of galleryStyle.css) 
 main.photo-gallery {
-    display: flex; /* Change to flexbox */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    gap: 0; /* Remove gap if using margin-bottom for finer control */
+    display: flex; /* Change to flexbox
+    flex-direction: column; /* Stack items vertically 
+    align-items: center; /* Center items horizontally
+    gap: 0; /* Remove gap if using margin-bottom for finer control 
     padding: 2rem 0;
     width: 100%;
     margin: 0 auto;
 }
 
+*/
+
+/* 
 .photo-item {
     overflow: hidden;
-    width: 90%; /* Set a relative width for each photo item */
-    max-width: 800px; /* Optional: Set a maximum width for larger screens */
-    margin-bottom: 1.5rem; /* Space between each photo item */
-    /* Add padding if you want space inside the photo-item before the image/iframe */
-    /* padding: 0.5rem; */ /* Example */
-    background-color: transparent; /* Ensure no background that adds unwanted space */
+    width: 90%; /* Set a relative width for each photo item 
+    max-width: 800px; /* Optional: Set a maximum width for larger screens
+    margin-bottom: 1.5rem; /* Space between each photo item 
+    background-color: transparent; /* Ensure no background that adds unwanted space 
 }
 
-/* Remove margin-bottom from the last photo-item to prevent excess space at the end */
+*/
+
+
+
+/* Remove margin-bottom from the last photo-item to prevent excess space at the end 
 .photo-item:last-child {
     margin-bottom: 0;
+}
+*/
+
+main.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Creates responsive columns */
+    grid-auto-rows: 10px; /* Base row height for spanning items (adjust as needed) */
+    gap: 2px; /* Spacing between grid items */
+    padding: 0; /* Remove padding if you want truly edge-to-edge layout within the container */
+    width: 100%; /* Ensure it takes full width of its parent */
+    margin: 0 auto; /* Center the grid if its parent allows */
+
+    /* Add this to push content below the fixed header */
+    padding-top: 7rem; /* Adjust this value as needed to clear the header */
+    padding-left: 1rem; /* Example: add some side padding if removed earlier */
+    padding-right: 1rem; /* Example: add some side padding if removed earlier */
 }
 
 .photo-item iframe,
@@ -144,7 +165,7 @@ main.photo-gallery {
     height: auto;
     border: none;
     overflow: hidden;
-    /* Ensure no extra padding/margin on the images/iframes themselves */
+    vertical-align: middle; /* Helps prevent extra space below images */
 }
 
 /* Responsive styles for very small screens from style.css */
