@@ -165,7 +165,6 @@ main.photo-gallery {
     height: auto;
     border: none;
     overflow: hidden;
-     /* Helps prevent extra space below images */
 }
 
 /* Responsive styles for very small screens from style.css */
